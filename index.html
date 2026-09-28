@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PX MART</title>
+<style>
+  body{margin:0;
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+    #stage{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    background-image:url("bg1.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+
+  .item{
+    position:absolute;
+    cursor:pointer;
+  }
+  #mandu{left:10%; top:60%; width:30%;}
+  #ramen{left:35%; top:55%; width:30%;}
+  #cola {left:60%; top:55%; width:30%;}
+  #siren{left:90%; top:80%; width:10%;}
+  #trash{left:90%; top:80%; width:10%; display:none;}
+
+  #black-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: none;
+    z-index: 10;
+  }
+
+  #return-btn {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 10%;
+    display: none;
+    z-index: 11;
+  }
+
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <img id="bg" src="bg.png">
+
+  <img id="mandu" class="item" src="mandu1.png">
+  <img id="ramen" class="item" src="ramen1.png">
+  <img id="cola"  class="item" src="cola1.png">
+  <img id="siren" class="item" src="siren.png">
+  <img id="trash" class="item" src="trash.png">
+
+  <audio id="sndmandu" src="mandu.mp3"></audio>
+  <audio id="sndramen" src="ramen.mp3"></audio>
+  <audio id="sndcola"  src="cola.mp3"></audio>
+  <audio id="sndsiren" src="siren.mp3"></audio>
+  <audio id="sndtrash" src="trash.mp3"></audio>
+</div>
+
+<script>
+const manduImgs = ["mandu1.png", "mandu2.png", "mandu3.png"];
+let manduStep = 0;
+mandu.onclick = function(){
+  if (manduStep < 2) {
+    manduStep++;
+    mandu.src = manduImgs[manduStep];
+  } else if (manduStep === 2) {
+    manduStep = 3;
+    mandu.style.display = "none";
+  }
+  sndmandu.currentTime = 0;
+  sndmandu.play();
+};
+
+const ramenImgs = ["ramen1.png", "ramen2.png", "ramen3.png"];
+let ramenStep = 0;
+ramen.onclick = function(){
+   if (ramenStep < 2) {
+    ramenStep++;
+    ramen.src = ramenImgs[ramenStep];
+  } else if (ramenStep === 2) {
+    ramenStep = 3;
+    ramen.style.display = "none";
+  }
+  sndramen.currentTime = 0;
+  sndramen.play();
+};
+
+const colaImgs = ["cola1.png", "cola2.png", "cola3.png"];
+let colaStep = 0;
+cola.onclick = function(){
+   if (colaStep < 2) {
+    colaStep++;
+    cola.src = colaImgs[colaStep];
+  } else if (colaStep === 2) {
+    colaStep = 3;
+    cola.style.display = "none";
+  }
+  sndcola.currentTime = 0;
+  sndcola.play();
+};
+
+siren.onclick = function(){
+  stage.style.backgroundImage = "url('bg2.jpg')";
+  siren.style.display = "none";
+  trash.style.display = "block";
+
+  mandu.style.opacity = "0.1"
+  ramen.style.opacity = "0.1"
+  cola.style.opacity = "0.1"
+
+  sndsiren.currentTime = 0;
+  sndsiren.play();
+};
+
+trash.onclick = function(){
+  stage.style.backgroundImage = "url('bg1.jpg')";
+
+  manduStep = 0; mandu.src = manduImgs[0]; mandu.style.display = "block";
+  ramenStep = 0; ramen.src = ramenImgs[0]; ramen.style.display = "block";
+  colaStep  = 0; cola.src  = colaImgs[0]; cola.style.display = "block";
+  mandu.style.opacity = "1";
+  ramen.style.opacity = "1";
+  cola.style.opacity = "1";
+
+  sndtrash.currentTime = 0;
+  sndtrash.play();
+
+  sndsiren.pause();
+  sndsiren.currentTime = 0;
+
+  trash.style.display = "none";
+  siren.style.display = "block";
+};
+</script>
+
+</body>
+</html>
